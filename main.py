@@ -1,19 +1,39 @@
-import pygame
+import pygame as pg
 
-pygame.init()
+
+pg.init()
+
+
+##########################
+# --> FUNÇÃO PARA RODAR O JOGO
+##########################
+
+# --> INICIALIZAÇÃO DA TELA /NOME DA JANELA(GAME)/ CARREGAR A IMAGEM DO MAPA/ SETAR O ICONE DO JOGO NA ABA
+display = pg.display.set_mode((800,600))
+pg.display.set_caption("Gotta catch 'em all!")
+mapa = pg.image.load("images/background.png")
+icon = pg.image.load("images/icon.png")
+pg.display.set_icon(icon)
+
+# --> INICIALIZAÇÃO E O CARRREGAMENTO DA MÚSICA DE FUNDO  ((PS: TÁ DANDO UNS BUGS VOU ARRUMAR DPS BY: SEVE))
+#pg.mixer.init()
+#pg.mixer.music.load("/home/juninho/Documentos/PROJETO-IP/fundo.mp3")
+#pg.mixer.music.play(-1)
 
 def main():
-    display = pygame.display.set_mode((800,600))
-    pygame.display.set_caption("PokeEdit")
-    mapa = pygame.image.load("imagens/background.png")
-    
+    # --> LOOP INFINITO QUE RODA O GAME 
     while True:
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                pygame.quit()
+        #VERIFICAÇÃO PARA O FECHAMENTO DA JANELA
+        for event in pg.event.get():
+            if event.type == pg.QUIT:
+                pg.quit()
     
+
+        
         display.fill((0,0,0))
         display.blit(mapa, (0,0))
-        pygame.display.update()
+
+        #ATUALIZA O DISPLAY
+        pg.display.update()
            
 main()
