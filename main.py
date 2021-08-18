@@ -51,8 +51,8 @@ def main():
         display.blit(map, (0, 0))
         display.blit(score_1, (50, 5))
         display.blit(score_2, (50, 40))
-        display.blit(icon_poke_1, (10, 5))
-        display.blit(icon_poke_2, (10, 40))
+        display.blit(icon_poke_1, (10, 10))
+        display.blit(icon_poke_2, (10, 45))
 
         # ATUALIZA O DISPLAY
         pg.display.update()
