@@ -62,9 +62,54 @@ def desenhar(r, g, b):
     janela.fill([r, g, b])
 
 #Informações do Jogador
-Jogador = pg.Rect(XJogador,YJogador,LarguraJogador,AlturaJogador)
-
+#Jogador = pg.Rect(XJogador,YJogador,LarguraJogador,AlturaJogador)
+GrupoJogador = pg.sprite.Group()
+Jogador = pg.sprite.Sprite(GrupoJogador)
+Jogador.image = pg.image.load('images/Jogador_Frente.png')
+Jogador.image = pg.transform.scale(Jogador.image, [35,35])
+Jogador.rect = pg.Rect(XJogador,YJogador,LarguraJogador,AlturaJogador)
 icone = False
+
+direita, esquerda, baixo, cima = 0,0,0,0
+
+def SpriteJogadorDireita():
+    if direita%4 == 0:
+        return(pg.image.load('images/Jogador_DireitaB.png'))
+    if direita%4 == 1:
+        return(pg.image.load('images/Jogador_Direita1B.png'))
+    if direita%4 == 2:
+        return(pg.image.load('images/Jogador_DireitaB.png'))
+    if direita%4 == 3:
+        return (pg.image.load('images/Jogador_Direita2B.png'))
+def SpriteJogadorEsquerda():
+    if esquerda%4 == 0:
+        return(pg.image.load('images/Jogador_EsquerdaB.png'))
+    if esquerda%4 == 1:
+        return(pg.image.load('images/Jogador_Esquerda1B.png'))
+    if esquerda%4 == 2:
+        return(pg.image.load('images/Jogador_EsquerdaB.png'))
+    if esquerda%4 == 3:
+        return (pg.image.load('images/Jogador_Esquerda2B.png'))
+def SpriteJogadorFrente():
+    if baixo%4 == 0:
+        return(pg.image.load('images/Jogador_FrenteB.png'))
+    if baixo%4 == 1:
+        return(pg.image.load('images/Jogador_Frente1B.png'))
+    if baixo%4 == 2:
+        return(pg.image.load('images/Jogador_FrenteB.png'))
+    if baixo%4 == 3:
+        return (pg.image.load('images/Jogador_Frente2B.png'))
+def SpriteJogadorCostas():
+    if cima%4 == 0:
+        return(pg.image.load('images/Jogador_CostasB.png'))
+    if cima%4 == 1:
+        return(pg.image.load('images/Jogador_Costas1B.png'))
+    if cima%4 == 2:
+        return(pg.image.load('images/Jogador_CostasB.png'))
+    if cima%4 == 3:
+        return (pg.image.load('images/Jogador_Costas2B.png'))
+
+Jogador.image = SpriteJogadorFrente()
 
 # Loop do Jogo.
 if __name__ == '__main__':
@@ -78,7 +123,7 @@ if __name__ == '__main__':
             score_2 = font_1.render(str(score_value_1), True, (255, 255, 255))
             display.fill((0, 0, 0))
             display.blit(map, (0, 0))
-            pg.draw.rect(display, [255, 255, 255, 255], Jogador)
+            GrupoJogador.draw(display)
             if not icone:
                 display.blit(score_1, (50, 15))
                 display.blit(score_2, (50, 50))
@@ -90,6 +135,8 @@ if __name__ == '__main__':
             #Os ifs são para registrar o apertar de uma tecla
             if teclas[pg.K_d] and XJogador < LarguraJanela - LarguraJogador:
                 icone = True
+                Jogador.image = SpriteJogadorDireita()
+                direita += 1
                 #Os for são para criar um movimento contínuo
                 for i in range(VelocidadeJogador//5):
                     #Muda a posição do jogador na variável
@@ -98,12 +145,12 @@ if __name__ == '__main__':
                     display.fill((0, 0, 0))
                     display.blit(map, (0, 0))
                     #Atualiza o Jogador e desenha ele na janela
-                    Jogador = pg.Rect(XJogador, YJogador, LarguraJogador, AlturaJogador)
+                    Jogador.rect = pg.Rect(XJogador, YJogador, LarguraJogador, AlturaJogador)
+                    GrupoJogador.draw(display)
                     display.blit(score_1, (50, 15))
                     display.blit(score_2, (50, 50))
                     display.blit(icon_poke_1, (10, 10))
                     display.blit(icon_poke_2, (10, 45))
-                    pg.draw.rect(display, [255, 255, 255, 255], Jogador)
                     #Atualiza a janela
                     pg.display.update()
                     #Tempo da movimentação de cada pixel
@@ -112,12 +159,14 @@ if __name__ == '__main__':
                 icone = False
             if teclas[pg.K_a] and XJogador > 0:
                 icone = True
+                Jogador.image = SpriteJogadorEsquerda()
+                esquerda += 1
                 for i in range(VelocidadeJogador//5):
                     XJogador -= 5
                     display.fill((0, 0, 0))
                     display.blit(map, (0, 0))
-                    Jogador = pg.Rect(XJogador, YJogador, LarguraJogador, AlturaJogador)
-                    pg.draw.rect(display, [255, 255, 255, 255], Jogador)
+                    Jogador.rect = pg.Rect(XJogador, YJogador, LarguraJogador, AlturaJogador)
+                    GrupoJogador.draw(display)
                     display.blit(score_1, (50, 15))
                     display.blit(score_2, (50, 50))
                     display.blit(icon_poke_1, (10, 10))
@@ -128,12 +177,14 @@ if __name__ == '__main__':
                 icone = False
             if teclas[pg.K_s] and YJogador < AlturaJanela - LarguraJogador:
                 icone = True
+                Jogador.image = SpriteJogadorFrente()
+                baixo += 1
                 for i in range(VelocidadeJogador//5):
                     YJogador += 5
                     display.fill((0, 0, 0))
                     display.blit(map, (0, 0))
-                    Jogador = pg.Rect(XJogador, YJogador, LarguraJogador, AlturaJogador)
-                    pg.draw.rect(display, [255, 255, 255, 255], Jogador)
+                    Jogador.rect = pg.Rect(XJogador, YJogador, LarguraJogador, AlturaJogador)
+                    GrupoJogador.draw(display)
                     display.blit(score_1, (50, 15))
                     display.blit(score_2, (50, 50))
                     display.blit(icon_poke_1, (10, 10))
@@ -144,12 +195,14 @@ if __name__ == '__main__':
                 icone = False
             if teclas[pg.K_w] and YJogador > 0:
                 icone = True
+                Jogador.image = SpriteJogadorCostas()
+                cima += 1
                 for i in range(VelocidadeJogador//5):
                     YJogador -= 5
                     display.fill((0, 0, 0))
                     display.blit(map, (0, 0))
-                    Jogador = pg.Rect(XJogador,YJogador,LarguraJogador,AlturaJogador)
-                    pg.draw.rect(display, [255, 255, 255, 255], Jogador)
+                    Jogador.rect = pg.Rect(XJogador, YJogador, LarguraJogador, AlturaJogador)
+                    GrupoJogador.draw(display)
                     display.blit(score_1, (50, 15))
                     display.blit(score_2, (50, 50))
                     display.blit(icon_poke_1, (10, 10))
