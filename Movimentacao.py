@@ -64,6 +64,8 @@ def desenhar(r, g, b):
 #Informações do Jogador
 Jogador = pg.Rect(XJogador,YJogador,LarguraJogador,AlturaJogador)
 
+icone = False
+
 # Loop do Jogo.
 if __name__ == '__main__':
     while JanelaAberta:
@@ -76,15 +78,18 @@ if __name__ == '__main__':
             score_2 = font_1.render(str(score_value_1), True, (255, 255, 255))
             display.fill((0, 0, 0))
             display.blit(map, (0, 0))
-            display.blit(score_1, (50, 15))
-            display.blit(score_2, (50, 50))
-            display.blit(icon_poke_1, (10, 10))
-            display.blit(icon_poke_2, (10, 45))
+            pg.draw.rect(display, [255, 255, 255, 255], Jogador)
+            if not icone:
+                display.blit(score_1, (50, 15))
+                display.blit(score_2, (50, 50))
+                display.blit(icon_poke_1, (10, 10))
+                display.blit(icon_poke_2, (10, 45))
         #Para habilitar o pressionamento das teclas
         teclas = pg.key.get_pressed()
         if not JogadorMovendo:
             #Os ifs são para registrar o apertar de uma tecla
             if teclas[pg.K_d] and XJogador < LarguraJanela - LarguraJogador:
+                icone = True
                 #Os for são para criar um movimento contínuo
                 for i in range(VelocidadeJogador//5):
                     #Muda a posição do jogador na variável
@@ -92,64 +97,70 @@ if __name__ == '__main__':
                     #Desenha um fundo preto
                     display.fill((0, 0, 0))
                     display.blit(map, (0, 0))
+                    #Atualiza o Jogador e desenha ele na janela
+                    Jogador = pg.Rect(XJogador, YJogador, LarguraJogador, AlturaJogador)
                     display.blit(score_1, (50, 15))
                     display.blit(score_2, (50, 50))
                     display.blit(icon_poke_1, (10, 10))
                     display.blit(icon_poke_2, (10, 45))
-                    #Atualiza o Jogador e desenha ele na janela
-                    Jogador = pg.Rect(XJogador, YJogador, LarguraJogador, AlturaJogador)
                     pg.draw.rect(display, [255, 255, 255, 255], Jogador)
                     #Atualiza a janela
                     pg.display.update()
                     #Tempo da movimentação de cada pixel
                     #time.sleep(0.03125 / VelocidadeJogador)
                 JogadorMovendo = True
+                icone = False
             if teclas[pg.K_a] and XJogador > 0:
+                icone = True
                 for i in range(VelocidadeJogador//5):
                     XJogador -= 5
                     display.fill((0, 0, 0))
                     display.blit(map, (0, 0))
+                    Jogador = pg.Rect(XJogador, YJogador, LarguraJogador, AlturaJogador)
+                    pg.draw.rect(display, [255, 255, 255, 255], Jogador)
                     display.blit(score_1, (50, 15))
                     display.blit(score_2, (50, 50))
                     display.blit(icon_poke_1, (10, 10))
                     display.blit(icon_poke_2, (10, 45))
-                    Jogador = pg.Rect(XJogador, YJogador, LarguraJogador, AlturaJogador)
-                    pg.draw.rect(display, [255, 255, 255, 255], Jogador)
                     pg.display.update()
                     #time.sleep(0.03125 / VelocidadeJogador)
                 JogadorMovendo = True
+                icone = False
             if teclas[pg.K_s] and YJogador < AlturaJanela - LarguraJogador:
+                icone = True
                 for i in range(VelocidadeJogador//5):
                     YJogador += 5
                     display.fill((0, 0, 0))
                     display.blit(map, (0, 0))
+                    Jogador = pg.Rect(XJogador, YJogador, LarguraJogador, AlturaJogador)
+                    pg.draw.rect(display, [255, 255, 255, 255], Jogador)
                     display.blit(score_1, (50, 15))
                     display.blit(score_2, (50, 50))
                     display.blit(icon_poke_1, (10, 10))
                     display.blit(icon_poke_2, (10, 45))
-                    Jogador = pg.Rect(XJogador, YJogador, LarguraJogador, AlturaJogador)
-                    pg.draw.rect(display, [255, 255, 255, 255], Jogador)
                     pg.display.update()
                     #time.sleep(0.03125 / VelocidadeJogador)
                 JogadorMovendo = True
+                icone = False
             if teclas[pg.K_w] and YJogador > 0:
+                icone = True
                 for i in range(VelocidadeJogador//5):
                     YJogador -= 5
                     display.fill((0, 0, 0))
                     display.blit(map, (0, 0))
+                    Jogador = pg.Rect(XJogador,YJogador,LarguraJogador,AlturaJogador)
+                    pg.draw.rect(display, [255, 255, 255, 255], Jogador)
                     display.blit(score_1, (50, 15))
                     display.blit(score_2, (50, 50))
                     display.blit(icon_poke_1, (10, 10))
                     display.blit(icon_poke_2, (10, 45))
-                    Jogador = pg.Rect(XJogador,YJogador,LarguraJogador,AlturaJogador)
-                    pg.draw.rect(display, [255, 255, 255, 255], Jogador)
                     pg.display.update()
                     #time.sleep(0.03125 / VelocidadeJogador)
                 JogadorMovendo = True
+                icone = False
         if JogadorMovendo:
             #Para que haja um delay entre o registo de cada pressionar
             #Também para impedir movimento diagonal
             time.sleep(0.0625)
             JogadorMovendo = False
-        pg.draw.rect(display, [255, 255, 255, 255], Jogador)
         pg.display.update()
