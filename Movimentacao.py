@@ -46,7 +46,7 @@ def atualizar():
 
 #Exibicao do Jogador
 LarguraJogador,AlturaJogador = 35,35
-XJogador,YJogador = 0,0
+XJogador,YJogador = 325,315
 
 #Quantos pixels ele anda por quadrado
 VelocidadeJogador = 35
@@ -62,16 +62,18 @@ def desenhar(r, g, b):
     janela.fill([r, g, b])
 
 #Informações do Jogador
-#Jogador = pg.Rect(XJogador,YJogador,LarguraJogador,AlturaJogador)
+#Para criar o sprite
 GrupoJogador = pg.sprite.Group()
 Jogador = pg.sprite.Sprite(GrupoJogador)
 Jogador.image = pg.image.load('images/Jogador_Frente.png')
 Jogador.image = pg.transform.scale(Jogador.image, [35,35])
 Jogador.rect = pg.Rect(XJogador,YJogador,LarguraJogador,AlturaJogador)
+
+#Para os icones nao ficarem piscando
 icone = False
 
+#Para O Sistema de Animação (Troca de Sprites)
 direita, esquerda, baixo, cima = 0,0,0,0
-
 def SpriteJogadorDireita():
     if direita%4 == 0:
         return(pg.image.load('images/Jogador_DireitaB.png'))
@@ -135,6 +137,7 @@ if __name__ == '__main__':
             #Os ifs são para registrar o apertar de uma tecla
             if teclas[pg.K_d] and XJogador < LarguraJanela - LarguraJogador:
                 icone = True
+                #Para pegar e mudar o sprite
                 Jogador.image = SpriteJogadorDireita()
                 direita += 1
                 #Os for são para criar um movimento contínuo
@@ -144,8 +147,9 @@ if __name__ == '__main__':
                     #Desenha um fundo preto
                     display.fill((0, 0, 0))
                     display.blit(map, (0, 0))
-                    #Atualiza o Jogador e desenha ele na janela
+                    #Atualiza o Jogador
                     Jogador.rect = pg.Rect(XJogador, YJogador, LarguraJogador, AlturaJogador)
+                    #Desenha o Jogador na Tela
                     GrupoJogador.draw(display)
                     display.blit(score_1, (50, 15))
                     display.blit(score_2, (50, 50))
@@ -159,13 +163,16 @@ if __name__ == '__main__':
                 icone = False
             if teclas[pg.K_a] and XJogador > 0:
                 icone = True
+                #Para pegar e mudar o sprite
                 Jogador.image = SpriteJogadorEsquerda()
                 esquerda += 1
                 for i in range(VelocidadeJogador//5):
                     XJogador -= 5
                     display.fill((0, 0, 0))
                     display.blit(map, (0, 0))
+                    #Atualiza o Jogador
                     Jogador.rect = pg.Rect(XJogador, YJogador, LarguraJogador, AlturaJogador)
+                    #Desenha o Jogador na Tela
                     GrupoJogador.draw(display)
                     display.blit(score_1, (50, 15))
                     display.blit(score_2, (50, 50))
@@ -177,13 +184,16 @@ if __name__ == '__main__':
                 icone = False
             if teclas[pg.K_s] and YJogador < AlturaJanela - LarguraJogador:
                 icone = True
+                #Para pegar e mudar o sprite
                 Jogador.image = SpriteJogadorFrente()
                 baixo += 1
                 for i in range(VelocidadeJogador//5):
                     YJogador += 5
                     display.fill((0, 0, 0))
                     display.blit(map, (0, 0))
+                    #Atualiza o Jogador
                     Jogador.rect = pg.Rect(XJogador, YJogador, LarguraJogador, AlturaJogador)
+                    #Desenha o Jogador na Tela
                     GrupoJogador.draw(display)
                     display.blit(score_1, (50, 15))
                     display.blit(score_2, (50, 50))
@@ -195,13 +205,16 @@ if __name__ == '__main__':
                 icone = False
             if teclas[pg.K_w] and YJogador > 0:
                 icone = True
+                #Para pegar e mudar o sprite
                 Jogador.image = SpriteJogadorCostas()
                 cima += 1
                 for i in range(VelocidadeJogador//5):
                     YJogador -= 5
                     display.fill((0, 0, 0))
                     display.blit(map, (0, 0))
+                    #Atualiza o Jogador
                     Jogador.rect = pg.Rect(XJogador, YJogador, LarguraJogador, AlturaJogador)
+                    #Desenha o Jogador na Tela
                     GrupoJogador.draw(display)
                     display.blit(score_1, (50, 15))
                     display.blit(score_2, (50, 50))
