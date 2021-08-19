@@ -136,7 +136,7 @@ if __name__ == '__main__':
                 inicio = XJogador
                 final = XJogador
                 while final - inicio < 35:
-                    XJogador+=5/1.5
+                    XJogador+=3.5
                     final = XJogador
                     # Desenha um fundo preto
                     display.fill((0, 0, 0))
@@ -150,7 +150,6 @@ if __name__ == '__main__':
                     display.blit(icon_poke_2, (10, 45))
                     # Atualiza a janela
                     pg.display.update()
-                XJogador = (XJogador // 35) * 35
                 icone = False
             if teclas[pg.K_a] and XJogador > 0:
                 icone = True
@@ -159,7 +158,7 @@ if __name__ == '__main__':
                 inicio = XJogador
                 final = XJogador
                 while math.fabs(final - inicio) < 35:
-                    XJogador -= 5 / 1.5
+                    XJogador -= 3.5
                     final = XJogador
                     # Desenha um fundo preto
                     display.fill((0, 0, 0))
@@ -173,7 +172,6 @@ if __name__ == '__main__':
                     display.blit(icon_poke_2, (10, 45))
                     # Atualiza a janela
                     pg.display.update()
-                XJogador = ((XJogador // 35)+1) * 35
                 icone = False
             if teclas[pg.K_s] and YJogador < AlturaJanela - LarguraJogador:
                 icone = True
@@ -182,7 +180,7 @@ if __name__ == '__main__':
                 inicio = YJogador
                 final = YJogador
                 while final - inicio < 35:
-                    YJogador += 5 / 1.5
+                    YJogador += 3.5
                     final = YJogador
                     # Desenha um fundo preto
                     display.fill((0, 0, 0))
@@ -196,7 +194,6 @@ if __name__ == '__main__':
                     display.blit(icon_poke_2, (10, 45))
                     # Atualiza a janela
                     pg.display.update()
-                YJogador = (YJogador // 35) * 35
                 icone = False
             if teclas[pg.K_w] and YJogador > 0:
                 icone = True
@@ -205,7 +202,7 @@ if __name__ == '__main__':
                 inicio = YJogador
                 final = YJogador
                 while math.fabs(final - inicio) < 35:
-                    YJogador -= 5 / 1.5
+                    YJogador -= 3.5
                     final = YJogador
                     # Desenha um fundo preto
                     display.fill((0, 0, 0))
@@ -219,6 +216,5 @@ if __name__ == '__main__':
                     display.blit(icon_poke_2, (10, 45))
                     # Atualiza a janela
                     pg.display.update()
-                YJogador = ((YJogador // 35) + 1) * 35
                 icone = False
         pg.display.update()
