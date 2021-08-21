@@ -1,0 +1,1 @@
+__all__ = ['DadosSons','DadosTela','DadosMapa','DadosJogador','DadosIcones']
