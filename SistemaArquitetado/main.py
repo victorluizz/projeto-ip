@@ -1,0 +1,2 @@
+import RodarJogo
+RodarJogo.RodarJogo()
